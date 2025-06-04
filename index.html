@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>펠트지로 빵 만들기</title>
+
+<style type="text/css">
+		
+	/*커서 설정*/
+	* {cursor: url(https://cur.cursors-4u.net/food/foo-4/foo376.cur), auto !important;}
+
+
+	/*폰트 설정*/
+	@font-face {
+    font-family: 'HakgyoansimDunggeunmisoTTF-B';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-5@1.0/HakgyoansimDunggeunmisoTTF-B.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;}
+
+	@font-face {
+    font-family: 'omyu_pretty';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/omyu_pretty.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;}
+
+    html
+    {font-family: 'HakgyoansimDunggeunmisoTTF-B'; 
+    line-height: 1.1;
+    word-break: keep-all;}
+
+    h1 {font-size:7.8rem;}
+	h2 {font-size:4rem;}
+	h3 {font-size:3.2rem;}
+	h4 {font-size:2.6rem;}
+	h5 {font-size:2.3rem; line-height: 1.2;}
+	p
+	{font-family: 'omyu_pretty';
+	line-height: 1.5;
+	font-size:1.6rem;}
+
+
+
+	/* 여백, 기본간격 초기화 */
+	html, body, h1, h2, h3, h4, h5, p, ol, ul
+	{margin: 0; padding: 0; box-sizing: border-box;}
+
+	h1 {padding-top:300px; padding-bottom: 200px;}
+	h2 {padding-top:50px; padding-bottom: 50px;}
+	h3 {padding-top:100px; padding-bottom: 100px;}
+	section {padding-top:150px; padding-bottom: 100px;}
+	footer {padding-top:40px; padding-bottom: 40px;}
+	p {padding-top:50px; padding-bottom: 30px;}
+
+
+
+
+	/*컨테이너*/
+	.wrap {width: 65vw; margin:auto;}
+	.wrap2 {width: 58vw; margin:auto; padding-left: 7vw;}
+	.flex {display: flex}
+	.relative {position: relative;}
+	.absolute {position: absolute; bottom: 0; right: 0;}
+
+
+	.z1 {position: relative; z-index: 1;}
+	.z10 {position: relative; z-index: 10;}
+
+
+	.nav 
+	{	width: 2vw;
+		padding-top: 20px; padding-bottom: 20px; 
+		padding-right: 5px; padding-left: 5px; 
+		text-align: center;
+		color:white;
+		border: 3px solid #333;
+		border-radius: 50px;
+		position: sticky;
+	}
+
+	/*글씨 꾸미기*/
+	.t-white {color: #ffffff;}
+	.t-black {color: #333;}
+	.footer {font-size:2rem;}
+	.footer2 {line-height: 1.2; font-size:1rem;}
+
+	/*글씨 정렬*/
+	.left-spacing {text-align: left;}
+	.right-spacing {text-align: right;}
+	.center-spacing {text-align: center;}
+
+	/*색상 FF873C*/
+	.orange {background-color: #FF873C; color: white;}
+	.gra-orange {background: #ffffff; background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(255, 135, 60, 1) 100%);}
+	.white {background-color: #ffffff; color: #333;}
+
+
+
+
+
+
+
+	/* 흘러가는 배지 애니메이션 */
+	   .badges {
+	     overflow: hidden;
+	     position: relative;
+	     width: 100%;
+	     height: 170px;
+	     margin: 1em 0;
+	       display: flex;
+		  align-items: center; 
+	   }
+
+	   .badge-track {
+	     display: flex;
+	     gap: 1em;
+	     animation: scrollBadges 20s linear infinite;
+	     width: max-content;
+	   }
+
+	   .badges:hover .badge-track {
+	     animation-play-state: paused;
+	   }
+
+	   @keyframes scrollBadges {
+	     0% {
+	       transform: translateX(0);
+	     }
+
+	     100% {
+	       transform: translateX(-50%);
+	     }
+	   }
+
+	   .badge {
+	     background: white;
+	     color: #f58220;
+	     padding: 20px;
+	     width: 300px;
+	     height: 100px;
+	     border-radius: 30px;
+	     font-weight: bold;
+	     display: flex;
+	     align-items: center;
+	     justify-content: center;
+	     text-align: center;
+	     flex-shrink: 0;
+	   }
+
+	   @keyframes wiggle {
+	     0%,
+	     100% {transform: rotate(0deg);}
+	     25% {transform: rotate(2deg);}
+	     75% {transform: rotate(-2deg);}
+	   }
+
+	   .badges:hover .badge {animation: wiggle 1.5s ease-in-out infinite;}
+
+
+
+	   .popup-images {
+	     position: absolute;
+	     top: 0; left: 0;
+	     width: 100%; height: 100%;
+	     pointer-events: none;
+	     z-index: 1;
+	   }
+
+	   .popup-img {
+	     position: absolute;
+	     width: 100px;
+	     height: auto;
+	     opacity: 0;
+	     transform: scale(0.5);
+	     animation: popup 9s ease-in-out infinite;
+	   }
+
+	   @keyframes popup {
+	     0% { opacity: 0; transform: scale(0.5); }
+	     10% { opacity: 1; transform: scale(3); }
+	     50% { opacity: 1; transform: scale(3); }
+	     60% { opacity: 0; transform: scale(0.5); }
+	     100% { opacity: 0; transform: scale(0.5); }
+	   }
+
+
+
+	   .img1  { top: 10%; left: 15%; animation-delay: 0s; }
+	   .img2  { top: 30%; left: 50%; animation-delay: 0.5s; }
+	   .img3  { top: 60%; left: 20%; animation-delay: 1s; }
+	   .img4  { top: 40%; left: 70%; animation-delay: 1.5s; }
+	   .img5  { top: 15%; left: 80%; animation-delay: 2s; }
+	   .img6  { top: 65%; left: 35%; animation-delay: 2.5s; }
+	   .img7  { top: 20%; left: 60%; animation-delay: 3s; }
+	   .img8  { top: 50%; left: 10%; animation-delay: 3.5s; }
+	   .img9  { top: 75%; left: 45%; animation-delay: 4s; }
+	   .img10 { top: 25%; left: 85%; animation-delay: 4.5s; }
+	   .img11 { top: 35%; left: 30%; animation-delay: 5s; }
+	   .img12 { top: 70%; left: 65%; animation-delay: 5.5s; }
+	   .img13 { top: 40%; left: 40%; animation-delay: 6s; }
+	   .img14 { top: 60%; left: 75%; animation-delay: 6.5s; }
+	   .img15 { top: 30%; left: 20%; animation-delay: 7s; }
+	   .img16 { top: 55%; left: 50%; animation-delay: 7.5s; }
+	   .img17 { top: 20%; left: 35%; animation-delay: 8s; }
+	   .img18 { top: 10%; left: 65%; animation-delay: 8.5s; }
+	   .img19 { top: 65%; left: 10%; animation-delay: 9s; }
+	   .img20 { top: 45%; left: 25%; animation-delay: 9.5s; }
+	   .img21 { top: 35%; left: 75%; animation-delay: 10s; }
+	   .img22 { top: 25%; left: 45%; animation-delay: 10.5s; }
+	   .img23 { top: 50%; left: 80%; animation-delay: 11s; }
+	   .img24 { top: 15%; left: 60%; animation-delay: 11.5s; }
+
+	   /* 중복 이미지들 */
+	   .img25 { top: 70%; left: 30%; animation-delay: 12s; }
+	   .img26 { top: 40%; left: 55%; animation-delay: 12.5s; }
+	   .img27 { top: 10%; left: 40%; animation-delay: 13s; }
+	   .img28 { top: 65%; left: 50%; animation-delay: 13.5s; }
+	   .img29 { top: 35%; left: 15%; animation-delay: 14s; }
+	   .img30 { top: 25%; left: 70%; animation-delay: 14.5s; }
+
+
+
+
+	   .preview {
+	      position: absolute; right: 0; bottom: 0;top: 0; left: 0;
+	      min-width: 100%; min-height: 100%;
+	      width: auto; height: auto; z-index: -100;
+	      background-size: cover;
+	   }
+	
+
+
+
+	/* nav가 붙어있는 전체 감싸는 영역: step0~3까지만 sticky 효과 */
+	.nav-container {
+	  position: relative;
+	}
+
+	/* 실제 nav 스타일 */
+	.nav {
+	  position: sticky;
+	  top: 150px; /* 화면 상단에서 떨어진 위치 */
+	  left: 100px; /* 왼쪽에서 조금 떨어지게 */
+	  width: 50px;
+	  padding: 20px 5px;
+	  border-radius: 50px;
+	  background: white;
+	  border: 3px solid #333;
+	  text-align: center;
+	  z-index: 999;
+	  display: flex;
+	  flex-direction: column;
+	  gap: 20px;
+	}
+
+	/* nav 텍스트 스타일 */
+	.nav a {
+	  font-family: 'HakgyoansimDunggeunmisoTTF-B';
+	  color: #333;
+	  text-decoration: none;
+	  font-size: 1.4rem;
+	  transition: transform 0.2s ease;
+	}
+
+	.nav a:hover {
+	  transform: scale(1.2);
+	  color: #FF873C;
+	}
+
+
+
+	.grid-container {
+	  display: grid;
+	   grid-template-columns: repeat(3, 1fr);
+	   gap: 16px;
+	   margin-top: 20px;
+	}
+
+	.grid-item {
+	  perspective: 1000px;
+	  width: 100%;
+	  aspect-ratio: 1 / 1; 
+	}
+
+	.flip-inner {
+	  position: relative;
+	  width: 100%;
+	  height: 100%;
+	  transition: transform 0.8s;
+	  transform-style: preserve-3d;
+	}
+
+	.grid-item:hover .flip-inner {
+	  transform: rotateY(180deg);
+	}
+
+	.flip-front,
+	.flip-back {
+	  position: absolute;
+	  width: 100%;
+	  height: 100%;
+	  backface-visibility: hidden;
+	  border-radius: 12px;
+	  overflow: hidden;
+	  display: flex;
+	  align-items: center;
+	  justify-content: center;
+	}
+
+	.flip-front img {
+	  width: 100%;
+	  height: 100%;
+	  object-fit: contain;
+	  border-radius: 12px;
+	}
+
+	.flip-back {
+	  background-color: #FF873C;
+	  color: white;
+	  transform: rotateY(180deg);
+	  font-size: 3rem;
+	  font-family: 'HakgyoansimDunggeunmisoTTF-B';
+	  text-align: center;
+	  padding: 10px;
+	}
+
+
+
+
+</style>
+
+</head>
+
+
+
+
+<body>
+
+
+<!-- 페이지 맨 위 -->
+<div id="top"></div>
+
+	<!--제목, 헤더--> 
+	<header class="gra-orange">
+
+		<div class="wrap z10">
+		  <h1 class="t-white center-spacing">
+		    <span>
+		      펠트지로
+		      <br>
+		      빵 만들기
+		    </span>
+		  </h1>
+		</div>
+
+		<div class="popup-images z1">
+  <img src="bread1b.png" class="popup-img img1">
+  <img src="bread2b.png" class="popup-img img2">
+  <img src="bread3b.png" class="popup-img img3">
+  <img src="bread4b.png" class="popup-img img4">
+  <img src="bread5b.png" class="popup-img img5">
+  <img src="bread6b.png" class="popup-img img6">
+  <img src="bread7b.png" class="popup-img img7">
+  <img src="bread8b.png" class="popup-img img8">
+  <img src="bread9b.png" class="popup-img img9">
+  <img src="bread10b.png" class="popup-img img10">
+  <img src="bread11b.png" class="popup-img img11">
+  <img src="bread12b.png" class="popup-img img12">
+
+  <!-- 중복 등장 (b 이미지만) -->
+  <img src="bread2b.png" class="popup-img img13">
+  <img src="bread4b.png" class="popup-img img14">
+  <img src="bread6b.png" class="popup-img img15">
+  <img src="bread8b.png" class="popup-img img16">
+  <img src="bread10b.png" class="popup-img img17">
+  <img src="bread1b.png" class="popup-img img18">
+</div>
+
+
+
+
+	</header>
+
+
+
+  	<section class="orange center-spacing">
+  	<div class="wrap">
+	    <p>세상에는 맛있는 빵이 많지요!<br>
+	    요즘에는 인터넷에서 홈베이킹 레시피와 재료들을 어렵지 않게 접할 수 있어,<br>누구나 마음만 먹으면 빵을 만들 수 있습니다.</p>
+	  
+	    <h3>하<br>지<br>만<br>.<br>.<br>.</h3>
+
+
+	    <div class="badges">
+	            <div class="badge-track">
+	              <div class="badge"><h4>칼 사용이<br>위험해요</h4></div>
+	              <div class="badge"><h4>뜨거운 오븐이<br>필요해요</h4></div>
+	              <div class="badge"><h4>성공이<br>쉽지 않아요</h4></div>
+	              <div class="badge"><h4>재료 구하기가<br>어려워요</h4></div>
+	              <div class="badge"><h4>집에 도구가<br>없어요</h4></div>
+
+	              <!-- 복제 -->
+	              <div class="badge"><h4>칼 사용이<br>위험해요</h4></div>
+	              <div class="badge"><h4>뜨거운 오븐이<br>필요해요</h4></div>
+	              <div class="badge"><h4>성공이<br>쉽지 않아요</h4></div>
+	              <div class="badge"><h4>재료 구하기가<br>어려워요</h4></div>
+	              <div class="badge"><h4>집에 도구가<br>없어요</h4></div>
+	            </div>
+	    </div>
+
+
+	    <p>여전히 홈베이킹을 향한 어려움은 산더미처럼 많습니다!<br>이런 난관에 부딪힌 여러분을 위한 방법을 소개할게요.</p>
+	    <h4 style="padding-top: 150px; padding-bottom:80px;">펠트지 빵 만들기!</h4>
+	    <img src="https://i.gifer.com/XZ5V.gif" width="20%">
+	</div>
+  	</section>
+
+
+
+<div class="nav-container">
+
+  	<section id="step0" class="white">
+
+  	<!-- 네비게이션 바: STEP 0~3 섹션에만 sticky 되도록 nav-container로 감싸기 -->
+  	<div class="nav-container">
+  	  <nav class="nav">
+  	    <a href="#top">T</a>
+  	    <a href="#step0">0</a>
+  	    <a href="#step1">1</a>
+  	    <a href="#step2">2</a>
+  	    <a href="#step3">3</a>
+  	    <a href="#bottom">B</a>
+  	  </nav>
+  	</div>
+
+  	<div class="wrap center-spacing">
+
+	    	<h2>STEP 0<br>재료 준비하기</h2>
+	    	<p style="padding-top:0;">재료에 마우스를 올려 이름을 확인해 보세요!</p>
+
+		    	<div class="grid-container">
+		    	  <div class="grid-item">
+		    	    <div class="flip-inner">
+		    	      <div class="flip-front">
+		    	        <img src="pre1.png" alt="펠트지">
+		    	      </div>
+		    	      <div class="flip-back">펠트지</div>
+		    	    </div>
+		    	  </div>
+
+		    	  <div class="grid-item">
+		    	    <div class="flip-inner">
+		    	      <div class="flip-front">
+		    	        <img src="pre2.png" alt="실과 바늘">
+		    	      </div>
+		    	      <div class="flip-back">실과 바늘</div>
+		    	    </div>
+		    	  </div>
+
+		    	  <div class="grid-item">
+		    	    <div class="flip-inner">
+		    	      <div class="flip-front">
+		    	        <img src="pre3.png" alt="가위">
+		    	      </div>
+		    	      <div class="flip-back">가위</div>
+		    	    </div>
+		    	  </div>
+
+		    	  <div class="grid-item">
+		    	    <div class="flip-inner">
+		    	      <div class="flip-front">
+		    	        <img src="pre4.png" alt="펜">
+		    	      </div>
+		    	      <div class="flip-back">펜</div>
+		    	    </div>
+		    	  </div>
+
+		    	  <div class="grid-item">
+		    	    <div class="flip-inner">
+		    	      <div class="flip-front">
+		    	        <img src="pre5.png" alt="솜">
+		    	      </div>
+		    	      <div class="flip-back">솜</div>
+		    	    </div>
+		    	  </div>
+
+		    	  <div class="grid-item">
+		    	    <div class="flip-inner">
+		    	      <div class="flip-front">
+		    	        <img src="pre6.png" alt="핀셋">
+		    	      </div>
+		    	      <div class="flip-back">핀셋</div>
+		    	    </div>
+		    	  </div>
+		    	</div>
+
+	      	</div>
+
+	</div>
+	</section>
+
+
+
+	<section id="step1" class="orange">
+ 	<div class="wrap">
+
+    		<h2>STEP 1<br>도안 만들기</h2>
+    		<div class="center-spacing">
+	    		<img src="sik.png" width="35%">
+	    		<p>우선 도안의 바탕이 될 밑그림을 그립니다.</p>
+
+	    		<img src="sik.gif" width="70%">
+	    		<p>그리고 그것을 기반으로 도안을 제작해 줍니다.</p>
+	    	</div>
+
+    </div>
+    	
+ 
+
+	</section>
+
+
+
+    <section id="step2" class="white">
+  	<div class="wrap">
+
+	    <h2 class="right-spacing">STEP 2<br>펠트 오리기</h2>
+	    <p>종이에 프린트한 도안을 잘라 줍니다.</p>
+	    <P>펠트 위에 자른 종이를 대고 따라 그립니다.<br>이때 종이 뒷면에 테이프를 붙여 펠트와 고정시키면 편해요!</p>
+	    <p>펠트 위에 그린 선을 따라 펠트를 잘라 줍니다.<br>펠트 위에 펜 자국이 남지 않게 깔끔하게 오려 주세요.</p>
+
+    </div>
+    </section>
+
+
+
+	<section id="step3" class="orange">
+ 	<div class="wrap">
+
+    	<h2 class="center-spacing">STEP 3<br>바느질 하기</h2>
+    	<p>아플리케<br>펠트 위에 펠트를 덧댈 때 사용하는 방식. 복잡한 도안을 표현할 때 자주 사용되는 방식이에요.</p>
+    	<p>버튼 홀 스티치<br>펠트와 펠트를 겹쳤을 때 외곽을 마무리하는 방식. 펠트 공예에서 가장 기본이 되는 바느질 기법이에요.<br>바느질을 1/3정도 마무리했을 때 솜을 넣어가며 입체감을 줍니다.</p>
+    	<p>끼워박기<br>버튼 홀 스티치의 변형. 펠트 사이에 펠트를 끼울 때 사용하는 방식. 이번 도안에서는 키링 고리를 끼워 바느질할 때 사용해 줄 거예요.</p>
+    
+    </div>
+    </section>
+
+</div>
+
+  	<section class="white center-spacing">
+  	<div class="wrap">
+  		
+
+	    <p>이렇게 하면...</p>
+
+	    	<div class="badges">
+	    		<div class="badge"><h4>짠!</h4></div>
+			</div>
+
+	    <p>이제 여러분도 나만의 빵 굿즈를 완성해보세요!</p>
+  	
+ 	</div>
+  	</section>
+
+  	<!-- 페이지 맨 아래 (footer 위에 위치) -->
+  	<div id="bottom"></div>
+
+  	<footer class="wrap">
+	<div class="flex relative">
+
+			<div>
+			<h5 class="footer">펠트지로<br>빵 만들기</h5>
+	    	<p class="footer2"><br>&copy; 2025 김민주 All rights reserved.</p>
+			</div>
+
+	    	<p class="footer2 absolute">
+		    	schoolbus8282@gmail.com
+		    	<br>
+		    	Web-publishing-final
+	   	 	</p>
+
+    	</div>
+  	</footer>
+
+</html>
